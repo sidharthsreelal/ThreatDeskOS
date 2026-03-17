@@ -1,0 +1,87 @@
+/* ── Desktop Icons ────────────────────────────────── */
+.desktop-icons-grid {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap-reverse;
+  align-content: flex-start;
+  gap: 20px;
+  max-height: calc(100% - 140px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.desktop-icon {
+  width: 90px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  user-select: none;
+}
+
+.desktop-icon:hover {
+  background: rgba(192, 0, 26, 0.08);
+  box-shadow: 0 0 0 1px rgba(192, 0, 26, 0.15);
+}
+
+.desktop-icon.selected {
+  background: rgba(192, 0, 26, 0.2);
+  box-shadow: 0 0 0 1px rgba(192, 0, 26, 0.4);
+}
+
+.desktop-icon:active {
+  transform: scale(0.95);
+  background: rgba(192, 0, 26, 0.25);
+}
+
+.desktop-icon-svg {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  transition: transform 0.2s;
+  pointer-events: none; /* Let clicks pass to the icon container */
+}
+
+.desktop-icon:hover .desktop-icon-svg {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 6px 12px rgba(192, 0, 26, 0.3));
+}
+
+.desktop-icon-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--text-2);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.desktop-icon:hover .desktop-icon-label,
+.desktop-icon.selected .desktop-icon-label {
+  color: var(--text-1);
+}
+
+/* ── Selection Marquee ───────────────────────────── */
+.selection-marquee {
+  position: absolute;
+  background: rgba(192, 0, 26, 0.1);
+  border: 1px solid rgba(192, 0, 26, 0.5);
+  pointer-events: none;
+  z-index: 100;
+  display: none;
+}

@@ -1,0 +1,53 @@
+:root {
+  /* ── Backgrounds ──────────────────────────────── */
+  --bg-desktop:    #060608;
+  --bg-window:     #0E0E14;
+  --bg-surface:    #13131C;
+  --bg-raised:     #1A1A28;
+  --bg-input:      #0E0E14;
+  --bg-taskbar:    rgba(6,6,8,0.94);
+
+  /* ── Aberdeen Red ─────────────────────────────── */
+  --red-deep:      #7A0000;
+  --red-mid:       #C0001A;
+  --red-bright:    #E8001F;
+  --red-glow:      rgba(192,0,26,0.20);
+  --red-subtle:    rgba(192,0,26,0.08);
+
+  /* ── Aberdeen Gradients ───────────────────────── */
+  --grad-aberdeen: linear-gradient(135deg, #7A0000 0%, #C0001A 45%, #E8001F 100%);
+  --grad-window:   linear-gradient(135deg, #7A0000 0%, #C0001A 55%, #1A1A28 100%);
+  --grad-subtle:   linear-gradient(135deg, rgba(122,0,0,0.55) 0%, rgba(192,0,26,0.25) 100%);
+  --grad-bar:      linear-gradient(90deg, #7A0000, #E8001F);
+
+  /* ── Text ─────────────────────────────────────── */
+  --text-1:        #F0EAE8;
+  --text-2:        #9A8F8D;
+  --text-3:        #4A4248;
+  --text-red:      #E8001F;
+  --text-code:     #FF6B6B;
+
+  /* ── Borders ──────────────────────────────────── */
+  --border:        rgba(192,0,26,0.22);
+  --border-bright: rgba(232,0,31,0.55);
+  --border-dim:    rgba(240,234,232,0.06);
+
+  /* ── Semantic ─────────────────────────────────── */
+  --success:       #00D68F;
+  --warning:       #FFA500;
+  --danger:        #E8001F;
+  --info:          #4DA6FF;
+
+  /* ── CVE Severity ─────────────────────────────── */
+  --sev-critical:  #E8001F;
+  --sev-high:      #FF6B35;
+  --sev-medium:    #FFA500;
+  --sev-low:       #4DA6FF;
+  --sev-none:      #9A8F8D;
+
+  /* ── Geometry ─────────────────────────────────── */
+  --r-sm:  4px;
+  --r-md:  8px;
+  --r-lg:  12px;
+  --r-xl:  18px;
+}

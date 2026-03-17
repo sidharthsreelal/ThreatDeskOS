@@ -1,0 +1,173 @@
+/* Layout */
+.nv-root {
+  display: flex; flex-direction: column; height: 100%;
+  font-family: 'IBM Plex Sans', sans-serif; color: var(--text-1);
+}
+
+.nv-toolbar {
+  flex-shrink: 0; padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-window); display: flex; flex-direction: column; gap: 10px;
+}
+
+.nv-input-row { display: flex; gap: 8px; align-items: flex-end; }
+
+.nv-ip-textarea {
+  flex: 1; background: var(--bg-input);
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  color: var(--text-1); font-family: 'Share Tech Mono', monospace; font-size: 12px;
+  padding: 10px 12px; resize: none;
+  transition: border-color 0.15s;
+}
+.nv-ip-textarea:focus { outline: none; border-color: var(--border-bright); }
+.nv-ip-textarea::placeholder { color: var(--text-3); }
+
+.nv-btn-primary {
+  background: var(--red-mid); border: none; border-radius: var(--r-md);
+  color: white; font-family: 'Rajdhani', sans-serif; font-weight: 600;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 10px 20px; cursor: pointer; white-space: nowrap; transition: background 0.15s;
+}
+.nv-btn-primary:hover    { background: var(--red-bright); }
+.nv-btn-primary:disabled { background: var(--text-3); cursor: not-allowed; }
+
+.nv-btn-ghost {
+  background: transparent; border: 1px solid var(--border); border-radius: var(--r-md);
+  color: var(--text-2); font-family: 'Rajdhani', sans-serif; font-weight: 600;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 10px 16px; cursor: pointer; transition: border-color 0.15s, color 0.15s;
+}
+.nv-btn-ghost:hover { border-color: var(--border-bright); color: var(--text-1); }
+
+.nv-tabs { display: flex; gap: 4px; }
+
+.nv-tab {
+  background: transparent; border: 1px solid var(--border); border-radius: var(--r-sm);
+  color: var(--text-2); font-family: 'Rajdhani', sans-serif; font-weight: 600;
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 6px 16px; cursor: pointer; transition: all 0.15s;
+}
+.nv-tab:hover  { border-color: var(--border-bright); color: var(--text-1); }
+.nv-tab.active {
+  background: var(--red-subtle); border-color: var(--red-mid);
+  color: var(--text-1);
+}
+
+.nv-legend { display: flex; gap: 16px; align-items: center; }
+.nv-legend-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text-2); font-family: 'IBM Plex Sans', sans-serif;
+}
+.nv-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+
+/* Canvas area */
+.nv-main {
+  flex: 1; display: flex; overflow: hidden; min-height: 0;
+}
+
+.nv-canvas-wrap {
+  flex: 1; position: relative; overflow: hidden; background: var(--bg-surface);
+}
+
+.nv-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.nv-empty {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+  color: var(--text-3); font-family: 'IBM Plex Sans', sans-serif;
+}
+.nv-empty-icon { font-size: 48px; opacity: 0.3; }
+.nv-empty p    { font-size: 14px; margin: 0; text-align: center; }
+.nv-empty-sub  { font-size: 12px !important; opacity: 0.6; }
+
+/* Loading overlay */
+.nv-loading {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+  background: rgba(6,6,8,0.6); backdrop-filter: blur(4px);
+}
+.nv-loading-bar {
+  width: 240px; height: 3px; background: var(--bg-raised); border-radius: 99px; overflow: hidden;
+}
+.nv-loading-fill {
+  height: 100%; background: var(--grad-bar); border-radius: 99px;
+  transition: width 0.3s ease; width: 0%;
+}
+.nv-loading-text {
+  font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--text-2);
+}
+
+/* Detail panel */
+.nv-detail {
+  width: 240px; flex-shrink: 0; border-left: 1px solid var(--border);
+  background: var(--bg-window); overflow-y: auto; padding: 16px;
+}
+.nv-detail-placeholder {
+  height: 100%; display: flex; align-items: center; justify-content: center;
+  color: var(--text-3); font-size: 12px; text-align: center;
+}
+.detail-panel { display: flex; flex-direction: column; gap: 14px; }
+.detail-header { display: flex; align-items: center; gap: 8px; }
+.detail-dot    { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.detail-ip     { font-family: 'Share Tech Mono', monospace; font-size: 14px; color: var(--text-1); }
+.detail-badge  {
+  font-size: 10px; font-family: 'Rajdhani', sans-serif; font-weight: 600;
+  letter-spacing: 0.08em; padding: 2px 6px; border-radius: var(--r-sm); text-transform: uppercase;
+}
+.detail-badge.private { background: rgba(255,165,0,0.15); color: var(--warning); border: 1px solid rgba(255,165,0,0.3); }
+.detail-grid { display: flex; flex-direction: column; gap: 8px; }
+.detail-row  { display: flex; flex-direction: column; gap: 2px; }
+.detail-label { font-size: 10px; color: var(--text-3); font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.detail-value { font-size: 13px; color: var(--text-1); word-break: break-all; }
+.detail-value.mono { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--text-code); }
+.detail-link  {
+  font-size: 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-red); text-decoration: none; transition: opacity 0.15s;
+}
+.detail-link:hover { opacity: 0.75; }
+
+/* Status bar */
+.nv-statusbar {
+  flex-shrink: 0; height: 28px; display: flex; align-items: center; gap: 8px;
+  padding: 0 20px; border-top: 1px solid var(--border); background: var(--bg-window);
+  font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-3);
+}
+.nv-sep { color: var(--border-bright); }
+.nv-btn-link {
+  background: none; border: none; cursor: pointer; margin-left: auto;
+  font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2);
+  transition: color 0.15s;
+}
+.nv-btn-link:hover { color: var(--text-red); }
+
+/* D3 spinner ring animation */
+@keyframes spin-ring {
+  to { stroke-dashoffset: -8; }
+}
+.spinner-ring {
+  animation: spin-ring 0.6s linear infinite;
+}
+
+/* Pulsing Green effect for My Location node */
+@keyframes loc-pulse {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 3px var(--success)); }
+  50% { opacity: 0.5; filter: drop-shadow(0 0 10px var(--success)); }
+}
+
+.my-location-node circle:last-of-type {
+  animation: loc-pulse 1.8s ease-in-out infinite;
+  fill: var(--success) !important;
+}
+
+.my-location-node circle:first-of-type {
+  fill: var(--success) !important;
+  opacity: 0.3 !important;
+}
+
+/* Smooth node label fade-in */
+.node text { opacity: 0; transition: opacity 0.3s; }
+.node:hover text { opacity: 1; }

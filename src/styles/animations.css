@@ -1,0 +1,78 @@
+/* ── Window animations ─────────────────────────── */
+@keyframes window-open {
+  from { transform: scale(0.94); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+@keyframes window-close {
+  from { transform: scale(1);    opacity: 1; }
+  to   { transform: scale(0.95); opacity: 0; }
+}
+@keyframes window-minimise {
+  from { transform: scale(1);   opacity: 1; }
+  to   { transform: scale(0.9); opacity: 0; }
+}
+
+/* ── Spin ────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Pulse glow ──────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 12px rgba(192,0,26,0.3); }
+  50%      { box-shadow: 0 0 28px rgba(232,0,31,0.55); }
+}
+
+/* ── Blink cursor ────────────────────────────────── */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.blink-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: var(--red-mid);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+/* ── Ticker ──────────────────────────────────────── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Fade in ─────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Slide up ────────────────────────────────────── */
+@keyframes slide-up {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Flash red (decay) ───────────────────────────── */
+@keyframes flash-red {
+  0%   { background: var(--bg-raised); }
+  30%  { background: rgba(232,0,31,0.15); }
+  100% { background: var(--bg-raised); }
+}
+
+/* ── Live dot pulse ──────────────────────────────── */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(1.3); }
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: live-pulse 2s ease-in-out infinite;
+}

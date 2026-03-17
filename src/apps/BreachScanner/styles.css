@@ -1,0 +1,55 @@
+.bs-container { display: flex; flex-direction: column; gap: 14px; }
+.bs-search-row { display: flex; gap: 8px; }
+.bs-search-row input { flex: 1; }
+.bs-status { font-size: 13px; color: var(--text-2); text-align: center; padding: 12px; }
+.bs-status.error { color: var(--danger); }
+.bs-breach-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  animation: slide-up 0.25s ease;
+}
+.bs-breach-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.bs-breach-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--text-1);
+}
+.bs-breach-date { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--text-2); }
+.bs-breach-count { font-size: 12px; color: var(--text-2); margin-bottom: 8px; }
+.bs-breach-count strong { color: var(--danger); }
+.bs-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.bs-tag {
+  padding: 2px 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--r-sm);
+  font-size: 11px; color: var(--text-2);
+  font-family: 'Share Tech Mono', monospace;
+}
+.bs-sensitive-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: var(--r-sm);
+  background: rgba(232,0,31,0.15); color: var(--danger);
+  font-size: 11px; font-weight: 600;
+}
+.bs-pwned-result {
+  text-align: center; padding: 24px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--r-md);
+}
+.bs-pwned-count {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 36px; font-weight: 700;
+}
+.bs-pwned-label {
+  font-size: 13px; color: var(--text-2); margin-top: 4px;
+}
+.bs-kanon-note {
+  font-size: 11px; color: var(--text-3);
+  text-align: center; padding: 8px;
+  border-top: 1px solid var(--border-dim);
+  font-family: 'Share Tech Mono', monospace;
+}

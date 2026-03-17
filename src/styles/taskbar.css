@@ -1,0 +1,221 @@
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: var(--bg-taskbar);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  border-left: 2px solid transparent;
+  border-image: var(--grad-aberdeen) 1;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+  z-index: 500;
+}
+
+.taskbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.taskbar-brand svg {
+  width: 20px;
+  height: 20px;
+}
+
+.taskbar-brand-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-red);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.taskbar-apps {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 0 8px;
+}
+
+.taskbar-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 10px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-2);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.taskbar-chip:hover {
+  border-color: var(--border-bright);
+  color: var(--text-1);
+}
+
+.taskbar-chip.focused {
+  border-bottom: 2px solid var(--red-mid);
+  color: var(--text-1);
+}
+
+.taskbar-chip.minimised {
+  opacity: 0.55;
+}
+
+.taskbar-chip-icon {
+  font-size: 13px;
+}
+
+.taskbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.network-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  transition: background 0.3s;
+  position: relative;
+  animation: live-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 6px var(--success);
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--success); }
+  50% { opacity: 0.5; box-shadow: 0 0 12px var(--success); }
+}
+
+.network-dot.offline {
+  background: var(--danger);
+  box-shadow: 0 0 6px var(--danger);
+  animation: live-pulse-red 2s ease-in-out infinite;
+}
+
+@keyframes live-pulse-red {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--danger); }
+  50% { opacity: 0.5; box-shadow: 0 0 12px var(--danger); }
+}
+
+.taskbar-clock {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+/* ── Live dot ────────────────────────────────────── */
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--success);
+  animation: live-pulse 1.5s ease-in-out infinite;
+}
+
+/* ── App Launcher Button ─────────────────────────── */
+.taskbar-launcher {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.taskbar-launcher:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-bright);
+}
+.taskbar-launcher svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--text-2);
+  transition: fill 0.15s;
+}
+.taskbar-launcher:hover svg {
+  fill: var(--text-red);
+}
+
+/* ── App Launcher Grid ───────────────────────────── */
+.app-launcher-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 490;
+}
+
+.app-launcher {
+  position: fixed;
+  bottom: 56px;
+  left: 16px;
+  width: 340px;
+  background: var(--bg-window);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(192,0,26,0.1);
+  padding: 12px;
+  z-index: 495;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.app-launcher-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.app-launcher-item:hover {
+  background: var(--bg-raised);
+}
+.app-launcher-item-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.app-launcher-item-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.app-launcher-item-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

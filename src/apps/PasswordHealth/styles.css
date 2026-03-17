@@ -1,0 +1,100 @@
+.ph-container { display: flex; flex-direction: column; gap: 16px; }
+.ph-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.ph-input-wrap input {
+  width: 100%;
+  padding: 12px 48px 12px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text-1);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.ph-input-wrap input:focus { border-color: var(--red-mid); }
+.ph-toggle {
+  position: absolute; right: 12px;
+  background: none; border: none;
+  color: var(--text-3); cursor: pointer;
+  font-size: 18px; padding: 4px;
+  transition: color 0.15s;
+}
+.ph-toggle:hover { color: var(--text-1); }
+
+.ph-bar-wrap {
+  height: 6px; background: var(--bg-input);
+  border-radius: 3px; overflow: hidden;
+}
+.ph-bar-fill {
+  height: 100%; border-radius: 3px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.ph-metrics {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+}
+.ph-metric {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  text-align: center;
+}
+.ph-metric-value {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--text-1);
+}
+.ph-metric-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px; font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.ph-section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-top: 8px;
+}
+
+.ph-pattern {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-left: 3px solid var(--red-mid);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+}
+.ph-pattern-type {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: var(--danger);
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.ph-pattern-desc {
+  font-size: 13px; color: var(--text-2); margin-top: 2px;
+}
+
+.ph-suggestion {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-left: 3px solid var(--success);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  font-size: 13px; color: var(--text-2);
+}
+
+.ph-score-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  text-align: center;
+}
