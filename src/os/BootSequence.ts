@@ -26,6 +26,7 @@ function getBootLines(analyst: string): Array<{ text: string; colour?: string }>
     { text: '─'.repeat(50), colour: '#4A4248' },
     { text: '' },
     { text: `All systems nominal. Welcome, ${analyst}.`, colour: '#00D68F' },
+    { text: `Enter 'gui' to launch the GUI.` },
   ];
 
   return [...baseLines, ...appLines, ...endLines];
