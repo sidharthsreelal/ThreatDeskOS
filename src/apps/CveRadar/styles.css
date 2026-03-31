@@ -1,0 +1,41 @@
+.cr-container { display: flex; flex-direction: column; gap: 14px; }
+.cr-search-row { display: flex; gap: 8px; }
+.cr-search-row input { flex: 1; }
+.cr-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.cr-cve-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  animation: slide-up 0.2s ease;
+}
+.cr-cve-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; }
+.cr-cve-id {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px; font-weight: 400;
+  color: var(--text-1);
+}
+.cr-cve-id a { color: var(--text-red); text-decoration: none; }
+.cr-cve-id a:hover { text-decoration: underline; }
+.cr-cvss-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 40px; padding: 2px 8px;
+  border-radius: var(--r-sm);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #fff;
+}
+.cr-cve-date { font-size: 12px; color: var(--text-3); font-family: 'Share Tech Mono', monospace; }
+.cr-cve-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; margin-top: 4px; }
+.cr-cve-cwe { margin-top: 6px; }
+.cr-pagination {
+  display: flex; justify-content: center; align-items: center; gap: 12px;
+  padding: 8px 0;
+}
+.cr-pagination-info { font-size: 12px; color: var(--text-2); font-family: 'Share Tech Mono', monospace; }
+.cr-refresh-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: var(--text-3);
+  font-family: 'Share Tech Mono', monospace;
+}
+.cr-status { font-size: 13px; color: var(--text-2); text-align: center; padding: 16px; }

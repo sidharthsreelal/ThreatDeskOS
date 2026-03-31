@@ -1,0 +1,83 @@
+.dv-container { display: flex; flex-direction: column; gap: 14px; height: 100%; }
+/* Lock Screen */
+.dv-lock-screen {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 16px; flex: 1;
+  text-align: center; padding: 32px;
+}
+.dv-shield {
+  width: 64px; height: 64px;
+  animation: pulse-glow 2.5s ease-in-out infinite;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+}
+.dv-title {
+  font-family: 'Rajdhani', sans-serif; font-size: 24px; font-weight: 700;
+  color: var(--text-1); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.dv-warning-banner {
+  background: rgba(232,0,31,0.1); border: 1px solid rgba(232,0,31,0.3);
+  border-radius: var(--r-md); padding: 10px 16px;
+  font-size: 13px; color: var(--danger); width: 100%; max-width: 360px;
+}
+.dv-integrity-bar-wrap {
+  width: 100%; max-width: 360px; height: 8px;
+  background: var(--bg-input); border-radius: 4px; overflow: hidden;
+}
+.dv-integrity-bar {
+  height: 100%; border-radius: 4px;
+  background: var(--grad-bar);
+  transition: width 0.8s ease;
+}
+.dv-integrity-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 12px;
+  color: var(--text-2); width: 100%; max-width: 360px; text-align: left;
+}
+.dv-pw-row {
+  display: flex; gap: 8px; width: 100%; max-width: 360px;
+}
+.dv-pw-row input { flex: 1; }
+
+/* Unlocked */
+.dv-header-row {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.dv-entry-list { display: flex; flex-direction: column; gap: 8px; flex: 1; overflow-y: auto; }
+.dv-entry-card {
+  background: var(--bg-raised); border: 1px solid var(--border-dim);
+  border-radius: var(--r-md); padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.dv-entry-card.decaying { animation: flash-red 0.8s ease; }
+.dv-entry-info { flex: 1; }
+.dv-entry-label {
+  font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 700;
+  color: var(--text-1);
+}
+.dv-entry-user { font-size: 12px; color: var(--text-2); font-family: 'Share Tech Mono', monospace; }
+.dv-entry-pw {
+  font-family: 'Share Tech Mono', monospace; font-size: 13px;
+  color: var(--success); margin-top: 4px; display: none;
+}
+.dv-entry-pw.visible { display: block; }
+.dv-integrity-badge {
+  font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 2px 8px; border-radius: var(--r-sm);
+  min-width: 44px; text-align: center;
+}
+.dv-integrity-badge.good { background: rgba(0,214,143,0.15); color: var(--success); }
+.dv-integrity-badge.warn { background: rgba(255,165,0,0.15); color: var(--warning); }
+.dv-integrity-badge.bad  { background: rgba(232,0,31,0.15); color: var(--danger); }
+
+/* Add form */
+.dv-add-form {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.dv-add-form input { width: 100%; }
+.dv-strength-bar-wrap {
+  height: 4px; background: var(--bg-input); border-radius: 2px; overflow: hidden;
+}
+.dv-strength-bar { height: 100%; border-radius: 2px; transition: width 0.2s, background 0.2s; }
