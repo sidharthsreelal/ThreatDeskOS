@@ -514,9 +514,10 @@ async function runVaultShell(t: Terminal): Promise<void> {
   if (!state.verifyToken) {
     t.print('<span class="t-red t-bold">DECAY VAULT — SETUP</span>');
     t.printDivider();
-    t.printRaw('No vault exists. Create one now.');
-    const pw = await t.readPassword('Set vault password: ');
-    const pw2 = await t.readPassword('Confirm password: ');
+    t.printRaw('No vault exists. Initialize your secure storage now.');
+    t.print('<span class="t-yellow">  ⚠ This password cannot be recovered if lost.</span>');
+    const pw = await t.readPassword('Create vault password: ');
+    const pw2 = await t.readPassword('Confirm vault password: ');
     if (pw !== pw2) { t.printRaw('Passwords do not match.', '#E8001F'); return; }
     const verify = await createVerifyToken(pw);
     state.verifyToken = verify.verifyToken;

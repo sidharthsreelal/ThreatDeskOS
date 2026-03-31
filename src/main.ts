@@ -114,14 +114,18 @@ async function doInit(
 
   term.printBr();
   term.print('<span class="t-red t-bold">═══ SYSTEM INITIALIZATION ═══</span>');
+  term.print('<span class="t-dim">  Create your analyst profile to secure this workstation.</span>');
   term.printBr();
 
   // Username
-  const username = await term.readLine('  Enter username: ');
+  const username = await term.readLine('  Create username: ');
   if (!username.trim()) { term.printRaw('  Aborted.', '#E8001F'); return; }
 
   // Password
-  const password = await term.readPassword('  Enter master password: ');
+  term.printBr();
+  term.print('<span class="t-dim">  Set a master password to encrypt your local data.</span>');
+  term.print('<span class="t-yellow">  ⚠ This password cannot be recovered if lost.</span>');
+  const password = await term.readPassword('  Create master password: ');
   if (!password) { term.printRaw('  Aborted.', '#E8001F'); return; }
 
   const password2 = await term.readPassword('  Confirm master password: ');

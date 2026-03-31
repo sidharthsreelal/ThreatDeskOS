@@ -35,10 +35,10 @@ export function mount(container: HTMLElement): void {
       ${state.entries.length > 0 ? `
         <div class="dv-integrity-label">VAULT INTEGRITY: ${avgIntegrity}%</div>
         <div class="dv-integrity-bar-wrap"><div class="dv-integrity-bar" style="width:${avgIntegrity}%"></div></div>
-      ` : '<div style="font-size:13px;color:var(--text-2)">No entries yet. Unlock to add passwords.</div>'}
+      ` : `<div style="font-size:13px;color:var(--text-2)">${isFirstTime ? '<span style="color:var(--highlight)">INITIALIZATION REQUIRED:</span> Set a master password to secure your vault.' : 'No entries yet. Unlock to add passwords.'}</div>`}
       <div class="dv-pw-row">
         <input class="input" type="password" placeholder="${isFirstTime ? 'Set master password...' : 'Master password...'}" id="dv-pw" />
-        <button class="btn btn-primary" id="dv-unlock">${isFirstTime ? 'CREATE' : 'UNLOCK'}</button>
+        <button class="btn btn-primary" id="dv-unlock">${isFirstTime ? 'INITIALIZE' : 'UNLOCK'}</button>
       </div>
     </div>`;
 
