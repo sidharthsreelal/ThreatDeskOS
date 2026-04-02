@@ -4,7 +4,6 @@ export interface UserSession {
   username: string;
   passwordHash: string;
   salt: string;
-  hibpKey: string;
   createdAt: number;
 }
 
@@ -26,17 +25,6 @@ export function clearSession(): void {
   localStorage.removeItem(SESSION_KEY);
 }
 
-export function getHibpKey(): string {
-  return loadSession()?.hibpKey ?? '';
-}
-
-export function setHibpKey(key: string): void {
-  const s = loadSession();
-  if (s) {
-    s.hibpKey = key;
-    saveSession(s);
-  }
-}
 
 // ── Password hashing (PBKDF2) ─────────────────────────────────────
 
@@ -63,7 +51,6 @@ export async function createSession(username: string, password: string): Promise
     username,
     passwordHash: hash,
     salt: Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join(''),
-    hibpKey: '',
     createdAt: Date.now(),
   };
   saveSession(session);

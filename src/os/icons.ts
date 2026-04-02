@@ -3,8 +3,6 @@
 // Password Health — Key icon
 export const ICON_PASSWORD_HEALTH = `<svg viewBox="0 0 24 24" fill="none" stroke="#E8001F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="5"/><path d="M13 10l8-8"/><path d="M18 3l3 3"/><path d="M15 6l3 3"/><circle cx="8" cy="15" r="1.5" fill="#E8001F" stroke="none"/></svg>`;
 
-// Breach Scanner — Shield with search
-export const ICON_BREACH_SCANNER = `<svg viewBox="0 0 24 24" fill="none" stroke="#E8001F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v5c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6L12 2z" fill="rgba(192,0,26,0.15)"/><circle cx="11" cy="11" r="3"/><path d="M14 14l3 3"/><path d="M9 11h4M11 9v4" stroke-width="1"/></svg>`;
 
 // Hash Forge — Chain link / hash
 export const ICON_HASH_FORGE = `<svg viewBox="0 0 24 24" fill="none" stroke="#E8001F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07L12 4.93"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07L12 19.07"/><path d="M9 9l6 6" stroke-width="1" stroke-dasharray="2 2"/></svg>`;
@@ -33,7 +31,6 @@ export const ICON_TERMINAL = `<svg viewBox="0 0 24 24" fill="none" stroke="#E800
 // Map app IDs to their icons
 export const APP_ICONS: Record<string, string> = {
   'password-health': ICON_PASSWORD_HEALTH,
-  'breach-scanner': ICON_BREACH_SCANNER,
   'hash-forge': ICON_HASH_FORGE,
   'cve-radar': ICON_CVE_RADAR,
   'cipher-playground': ICON_CIPHER_PLAYGROUND,

@@ -1,12 +1,9 @@
 // src/os/BootSequence.ts
 import { APPS } from '../apps/registry';
-import { getHibpKey } from './Session';
 
 const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, ms));
 
 function getBootLines(analyst: string): Array<{ text: string; colour?: string }> {
-  const hibpKey = getHibpKey();
-  const hibpStatus = hibpKey ? 'OK' : 'N/A';
 
   const baseLines: Array<{ text: string; colour?: string }> = [
     { text: 'THREATDESK OS  v2.4.1', colour: '#E8001F' },
@@ -14,7 +11,6 @@ function getBootLines(analyst: string): Array<{ text: string; colour?: string }>
     { text: 'BIOS/UEFI firmware check............................PASSED' },
     { text: 'Secure boot chain verification......................PASSED' },
     { text: 'Mounting crypto subsystem (Web Crypto API)..........OK' },
-    { text: `Connecting to HaveIBeenPwned API....................${hibpStatus}` },
   ];
 
   // Map registry apps to boot lines

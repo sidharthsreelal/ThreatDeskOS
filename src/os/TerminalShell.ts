@@ -7,8 +7,6 @@ import { fetchCVEs, cvssScore } from '../api/nvd';
 import { fetchAll } from '../api/ticker';
 import { getAllDNS } from '../api/dns';
 import { shodanLookup } from '../api/shodan';
-import { checkPasswordPwned, checkAccount } from '../api/hibp';
-import { getHibpKey, setHibpKey } from './Session';
 import { loadVault, saveVault, encryptPassword, decryptPassword, createVerifyToken, checkVerifyToken, applyDecay } from '../crypto/vault';
 import type { VaultState } from '../crypto/vault';
 import { rot13, caesar, vigenere, atbash, toBase64, fromBase64, toMorse, fromMorse } from '../apps/CipherPlayground/ciphers';
@@ -31,8 +29,6 @@ const HELP_TEXT = `
 <span class="t-dim">─────────────────────────────────────────────</span>
   <span class="t-green">pw</span>             Password strength analyser
   <span class="t-green">hash</span>           Hash text (SHA-256, SHA-1, MD5)
-  <span class="t-green">breach</span>         Email breach scanner (HIBP)
-  <span class="t-green">pwnpw</span>          Check if a password is pwned
   <span class="t-green">cve</span>            CVE database search
   <span class="t-green">ticker</span>         Live threat intelligence feed
   <span class="t-green">dns</span>            DNS lookup tool
@@ -40,7 +36,6 @@ const HELP_TEXT = `
   <span class="t-green">cipher</span>         Cipher & encoding playground
   <span class="t-green">vault</span>          Decay Vault (AES-256-GCM)
   <span class="t-green">netvis</span>         Network Visualiser CLI
-  <span class="t-green">hibpkey</span>        Set / view HIBP API key
 `;
 
 export function startShell(term: Terminal, username: string, onGui: () => void, onSplit?: () => void): void {
@@ -90,13 +85,6 @@ export function startShell(term: Terminal, username: string, onGui: () => void, 
         await runHashShell(t);
         break;
 
-      case 'breach':
-        await runBreachShell(t);
-        break;
-
-      case 'pwnpw':
-        await runPwnpwShell(t);
-        break;
 
       case 'cve':
         await runCveShell(t);
@@ -126,18 +114,6 @@ export function startShell(term: Terminal, username: string, onGui: () => void, 
         await runNetvisShell(t);
         break;
 
-      case 'hibpkey': {
-        const key = parts.slice(1).join(' ');
-        if (!key) {
-          const current = getHibpKey();
-          t.print(current ? `Current key: ${current.slice(0, 8)}...` : '<span class="t-yellow">No HIBP key set.</span>');
-          t.printRaw('Usage: hibpkey <your-api-key>');
-        } else {
-          setHibpKey(key);
-          t.print('<span class="t-green">✓ HIBP API key saved.</span>');
-        }
-        break;
-      }
 
       default:
         t.print(`<span class="t-red">Unknown command:</span> ${command}`);
@@ -264,74 +240,6 @@ async function runHashShell(t: Terminal): Promise<void> {
   });
 }
 
-// ── BREACH SCANNER ─────────────────────────────────────────────────
-
-async function runBreachShell(t: Terminal): Promise<void> {
-  if (!getHibpKey()) {
-    t.print('<span class="t-red">⚠ No HIBP API key set. Use: hibpkey &lt;your-key&gt;</span>');
-    return;
-  }
-
-  const help = `
-<span class="t-yellow">COMMANDS</span>
-  <span class="t-green">scan &lt;email&gt;</span>   Check email against HIBP breach database
-  <span class="t-green">exit</span>           Return to main shell`;
-
-  await subShell(t, 'BREACH SCANNER', help, 'breach', async (cmd, parts) => {
-    const sub = parts[0]?.toLowerCase();
-    const arg = parts.slice(1).join(' ');
-
-    if (sub === 'scan' || sub === 's') {
-      if (!arg) { t.printRaw('Usage: scan <email>', '#FFA500'); return false; }
-      t.printRaw(`Scanning ${arg}...`);
-      try {
-        const breaches = await checkAccount(arg);
-        if (!breaches.length) {
-          t.print('<span class="t-green">✓ No breaches found.</span>');
-        } else {
-          t.print(`<span class="t-red t-bold">⚠ FOUND ${breaches.length} BREACHES</span>`);
-          t.printDivider();
-          breaches.forEach(b => {
-            t.print(`  <span class="t-white">${b.Title}</span> <span class="t-dim">(${b.BreachDate})</span>`);
-            t.print(`    ${b.PwnCount.toLocaleString()} accounts | ${b.DataClasses.slice(0, 3).join(', ')}`);
-          });
-        }
-      } catch (e) { t.printRaw(`Error: ${e instanceof Error ? e.message : 'Unknown'}`, '#E8001F'); }
-    } else {
-      t.printRaw(`Unknown command: ${sub}. Type 'help'.`, '#FFA500');
-    }
-    return false;
-  });
-}
-
-// ── PWNPW ──────────────────────────────────────────────────────────
-
-async function runPwnpwShell(t: Terminal): Promise<void> {
-  const help = `
-<span class="t-yellow">COMMANDS</span>
-  <span class="t-green">check &lt;password&gt;</span>   Check if password appears in known breaches
-  <span class="t-green">exit</span>              Return to main shell`;
-
-  await subShell(t, 'PWNED PASSWORD CHECK', help, 'pwnpw', async (cmd, parts) => {
-    const sub = parts[0]?.toLowerCase();
-    const arg = parts.slice(1).join(' ');
-
-    if (sub === 'check' || sub === 'c') {
-      if (!arg) { t.printRaw('Usage: check <password>', '#FFA500'); return false; }
-      t.printRaw('Checking password (k-anonymity)...');
-      try {
-        const count = await checkPasswordPwned(arg);
-        if (count > 0)
-          t.print(`<span class="t-red">⚠ Password found ${count.toLocaleString()} times in breaches!</span>`);
-        else
-          t.print('<span class="t-green">✓ Password not found in any known breaches.</span>');
-      } catch (e) { t.printRaw(`Error: ${e instanceof Error ? e.message : 'Unknown'}`, '#E8001F'); }
-    } else {
-      t.printRaw(`Unknown command: ${sub}. Type 'help'.`, '#FFA500');
-    }
-    return false;
-  });
-}
 
 // ── CVE RADAR ──────────────────────────────────────────────────────
 

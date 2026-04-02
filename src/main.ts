@@ -10,7 +10,7 @@ import { initTaskBar } from './os/TaskBar';
 import { initAppLauncher } from './os/AppLauncher';
 import { Terminal, TerminalManager } from './os/Terminal';
 import { bootInTerminal } from './os/BootSequence';
-import { loadSession, createSession, verifyPassword, setHibpKey } from './os/Session';
+import { loadSession, createSession, verifyPassword } from './os/Session';
 import { startShell } from './os/TerminalShell';
 
 const BANNER = `<span class="t-red">
@@ -67,7 +67,6 @@ async function runSetup(
 
 <span class="t-yellow t-bold">8 SECURITY APPLICATIONS</span>
   <span class="t-green">PASSWORD HEALTH</span>     Real-time entropy analysis, pattern detection
-  <span class="t-green">BREACH SCANNER</span>      Check emails/passwords against HIBP database
   <span class="t-green">HASH FORGE</span>          SHA-256, SHA-1, MD5 hashing for text and files
   <span class="t-green">CVE RADAR</span>           Search NVD CVE database with auto-refresh
   <span class="t-green">CIPHER PLAYGROUND</span>   ROT13, Caesar, Vigenère, Atbash, Base64, Morse
@@ -82,7 +81,6 @@ async function runSetup(
 <span class="t-yellow t-bold">SECURITY</span>
   → All computation is client-side — nothing leaves your browser
   → Passwords encrypted with AES-256-GCM + PBKDF2 (310k iterations)
-  → Breach checking uses k-anonymity (only 5 SHA-1 prefix chars sent)
   → Master credentials use PBKDF2 hashing
 
 <span class="t-dim">Type '<span class="t-green">init</span>' to begin system initialization.</span>`);
@@ -134,11 +132,6 @@ async function doInit(
     return;
   }
 
-  // HIBP key (optional)
-  term.printBr();
-  term.print('<span class="t-dim">  Optional: Set your HIBP API key for breach scanning.</span>');
-  term.print('<span class="t-dim">  Get one at https://haveibeenpwned.com/API/Key</span>');
-  const hibpKey = await term.readLine('  HIBP API key (or press Enter to skip): ');
 
   // "Yes, do as I say" confirmation
   term.printBr();
@@ -156,9 +149,6 @@ async function doInit(
   term.printBr();
   await term.type('  Creating session...', { color: '#00D68F' });
   const session = await createSession(username, password);
-  if (hibpKey.trim()) {
-    setHibpKey(hibpKey.trim());
-  }
   await term.type('  Credentials secured with PBKDF2 (100k iterations).', { color: '#00D68F' });
   await term.type('  Session created.', { color: '#00D68F' });
   term.printBr();
