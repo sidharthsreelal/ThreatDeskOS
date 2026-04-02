@@ -20,13 +20,12 @@ ThreatDesk OS is a browser-based personal OS. It runs entirely in the browser �
 | # | ID | Title | Category |
 |---|---|---|---|
 | 1 | `password-health` | PASSWORD HEALTH | Serious |
-| 2 | `breach-scanner` | BREACH SCANNER | Serious |
-| 3 | `hash-forge` | HASH FORGE | Serious |
-| 4 | `cve-radar` | CVE RADAR | Serious |
-| 5 | `cipher-playground` | CIPHER PLAYGROUND | Fun |
-| 6 | `threat-ticker` | THREAT TICKER | Fun |
-| 7 | `osint-footprint` | OSINT FOOTPRINT | Advanced |
-| 8 | `decay-vault` | DECAY VAULT | Unique |
+| 2 | `hash-forge` | HASH FORGE | Serious |
+| 3 | `cve-radar` | CVE RADAR | Serious |
+| 4 | `cipher-playground` | CIPHER PLAYGROUND | Fun |
+| 5 | `threat-ticker` | THREAT TICKER | Fun |
+| 6 | `osint-footprint` | OSINT FOOTPRINT | Advanced |
+| 7 | `decay-vault` | DECAY VAULT | Unique |
 
 **Stack:** Vanilla TypeScript (strict mode), Vite, HTML5, CSS3 (custom properties), Web Crypto API, Fetch API. No React. No Vue. No Tailwind. No component libraries. Pure DOM.
 
@@ -135,7 +134,6 @@ threatdesk-os/
 │   ├── apps/
 │   │   ├── registry.ts
 │   │   ├── PasswordHealth/          # { index.ts, styles.css }
-│   │   ├── BreachScanner/
 │   │   ├── HashForge/
 │   │   ├── CveRadar/
 │   │   ├── CipherPlayground/
@@ -147,7 +145,6 @@ threatdesk-os/
 │   │   ├── entropy.ts               # Password entropy analysis
 │   │   └── vault.ts                 # AES-GCM + PBKDF2 + decay logic
 │   ├── api/
-│   │   ├── hibp.ts
 │   │   ├── nvd.ts
 │   │   ├── dns.ts                   # Cloudflare DoH
 │   │   ├── shodan.ts                # Shodan InternetDB
@@ -294,7 +291,6 @@ const LINES: Array<{ text: string; colour?: string }> = [
   { text: 'Secure boot chain verification......................PASSED' },
   { text: 'Loading threat intelligence modules.................OK' },
   { text: 'Mounting crypto subsystem (Web Crypto API)..........OK' },
-  { text: 'Connecting to HaveIBeenPwned API....................OK' },
   { text: 'Loading NVD CVE feed connector......................OK' },
   { text: 'Initialising Hash Forge engine......................OK' },
   { text: 'Loading Cipher Playground...........................OK' },
@@ -443,47 +439,6 @@ function suggest(pw: string, p: PatternMatch[], e: number): string[] {
 
 ---
 
-## APP 2 — BREACH SCANNER
-
-### `src/api/hibp.ts`
-
-```typescript
-const BASE = 'https://haveibeenpwned.com/api/v3';
-const KEY  = import.meta.env.VITE_HIBP_KEY ?? '';
-
-export interface Breach {
-  Name: string; Title: string; Domain: string; BreachDate: string;
-  PwnCount: number; Description: string; DataClasses: string[];
-  IsVerified: boolean; IsSensitive: boolean;
-}
-
-export async function checkAccount(account: string): Promise<Breach[]> {
-  if (!KEY) throw new Error('Add VITE_HIBP_KEY to .env.local');
-  const res = await fetch(`${BASE}/breachedaccount/${encodeURIComponent(account)}?truncateResponse=false`,
-    { headers: { 'hibp-api-key': KEY, 'user-agent': 'ThreatDesk-OS/2.0' } });
-  if (res.status === 404) return [];
-  if (res.status === 401) throw new Error('Invalid HIBP API key');
-  if (res.status === 429) throw new Error('Rate limited — wait 1.5 seconds');
-  if (!res.ok) throw new Error(`HIBP error ${res.status}`);
-  return res.json();
-}
-
-// k-anonymity — plaintext password NEVER sent
-export async function checkPasswordPwned(password: string): Promise<number> {
-  const hash = bufToHex(await crypto.subtle.digest('SHA-1', new TextEncoder().encode(password.toUpperCase())));
-  const res  = await fetch(`https://api.pwnedpasswords.com/range/${hash.slice(0,5)}`);
-  if (!res.ok) throw new Error('Password check failed');
-  const body  = await res.text();
-  const match = body.split('\r\n').find(l => l.startsWith(hash.slice(5).toUpperCase()));
-  return match ? parseInt(match.split(':')[1], 10) : 0;
-}
-
-function bufToHex(b: ArrayBuffer): string {
-  return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase();
-}
-```
-
-**UI:** Two tabs (EMAIL/USERNAME and PASSWORD). Email tab: breach cards with site, date, count, data class tags, sensitive badge. Password tab: exposure count with "never use this password" warning. Show k-anonymity note: "Only 5 SHA-1 prefix chars sent. Your password never leaves your device."
 
 ---
 

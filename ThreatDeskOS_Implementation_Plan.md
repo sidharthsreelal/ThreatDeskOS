@@ -22,13 +22,12 @@ The philosophy: a real security engineer's desktop, running in the browser. Dark
 | # | App | What It Does | APIs / Tech | Vibe |
 |---|---|---|---|---|
 | 1 | Password Health | Entropy scoring, crack-time, pattern detection | Web Crypto API, pure TS | Serious |
-| 2 | Breach Scanner | Email/password exposure via HaveIBeenPwned | HIBP v3 API | Serious |
-| 3 | Hash Forge | SHA-256 / SHA-1 / MD5 with file drag-drop | Web Crypto API | Serious |
-| 4 | CVE Radar | Live NVD vulnerability feed, filterable | NVD REST API v2 | Serious |
-| 5 | Cipher Playground | Classic cipher encrypt/decrypt + frequency analysis | Pure TS | Fun |
-| 6 | Threat Ticker | Live security news feed styled as an ops-room ticker | CISA RSS, GitHub Advisory | Fun |
-| 7 | OSINT Footprint | Full passive domain recon — WHOIS, DNS, SSL, Shodan | Multiple free APIs | Advanced |
-| 8 | Decay Vault | Password manager that self-destructs under brute-force | Web Crypto API, localStorage | Unique |
+| 2 | Hash Forge | SHA-256 / SHA-1 / MD5 with file drag-drop | Web Crypto API | Serious |
+| 3 | CVE Radar | Live NVD vulnerability feed, filterable | NVD REST API v2 | Serious |
+| 4 | Cipher Playground | Classic cipher encrypt/decrypt + frequency analysis | Pure TS | Fun |
+| 5 | Threat Ticker | Live security news feed styled as an ops-room ticker | CISA RSS, GitHub Advisory | Fun |
+| 6 | OSINT Footprint | Full passive domain recon — WHOIS, DNS, SSL, Shodan | Multiple free APIs | Advanced |
+| 7 | Decay Vault | Password manager that self-destructs under brute-force | Web Crypto API, localStorage | Unique |
 
 ---
 
@@ -140,7 +139,6 @@ threatdesk-os/
 ├── package.json
 ├── vite.config.ts
 ├── tsconfig.json
-├── .env.local                      # VITE_HIBP_KEY
 ├── src/
 │   ├── main.ts
 │   ├── os/
@@ -153,7 +151,6 @@ threatdesk-os/
 │   ├── apps/
 │   │   ├── registry.ts
 │   │   ├── PasswordHealth/
-│   │   ├── BreachScanner/
 │   │   ├── HashForge/
 │   │   ├── CveRadar/
 │   │   ├── CipherPlayground/
@@ -165,7 +162,6 @@ threatdesk-os/
 │   │   ├── entropy.ts
 │   │   └── vault.ts               # Decay Vault encryption logic
 │   ├── api/
-│   │   ├── hibp.ts
 │   │   ├── nvd.ts
 │   │   ├── dns.ts                 # Cloudflare DoH
 │   │   ├── whois.ts               # whois.freeaiapi.com
@@ -309,7 +305,7 @@ Connecting to HaveIBeenPwned API..............OK
 Loading NVD CVE feed connector................OK
 Initialising Hash Forge engine................OK
 Loading Cipher Playground.....................OK
-Loading Threat Ticker.........................OK
+Loading Threat Ticker.....................OK
 Loading OSINT Footprint engine................OK
 Mounting Decay Vault..........................OK
 ──────────────────────────────────────────────
@@ -356,13 +352,6 @@ export interface PatternMatch {
 
 ---
 
-## 8. App 2 — Breach Scanner
-
-HIBP v3 for account breaches. k-anonymity SHA-1 prefix model for password checks — plaintext password never leaves the browser.
-
-**API key:** `VITE_HIBP_KEY` in `.env.local`. Get at haveibeenpwned.com/API/Key ($3.50/month).
-
-**UI:** Two tabs — EMAIL/USERNAME and PASSWORD. Email tab shows breach cards with site name, date, record count, data class tags. Password tab shows times seen in breaches with a "never use this password" warning if count > 0.
 
 ---
 
