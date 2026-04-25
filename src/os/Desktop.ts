@@ -156,8 +156,8 @@ export function initDesktop(el: HTMLElement): void {
   
   const iconStates = APPS.map((app, i) => ({
     app,
-    x: 40 + (Math.floor(i / 6) * 110),
-    y: 40 + ((i % 6) * 110),
+    x: 40 + (Math.floor(i / 5) * 110),
+    y: 40 + ((i % 5) * 125),
     selected: false,
     el: null as HTMLElement | null
   }));
@@ -263,7 +263,7 @@ export function initDesktop(el: HTMLElement): void {
         const rect = { x1, y1, x2, y2 };
         const iconRect = {
           x1: s.x, y1: s.y,
-          x2: s.x + 90, y2: s.y + 100 // Approximation of icon size
+          x2: s.x + 90, y2: s.y + 104 // Matches fixed height in CSS
         };
         s.selected = !(iconRect.x1 > rect.x2 || iconRect.x2 < rect.x1 || iconRect.y1 > rect.y2 || iconRect.y2 < rect.y1);
       });

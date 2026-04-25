@@ -15,11 +15,13 @@
 
 .desktop-icon {
   width: 90px;
-  padding: 12px 8px;
+  height: 104px; /* Fixed height to keep grid aligned despite label wrapping */
+  padding: 10px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-start; /* Align from top, but fixed height keeps spacing consistent */
+  gap: 6px;
   cursor: pointer;
   pointer-events: auto;
   border-radius: 8px;
