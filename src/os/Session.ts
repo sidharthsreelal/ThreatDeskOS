@@ -25,7 +25,6 @@ export function clearSession(): void {
   localStorage.removeItem(SESSION_KEY);
 }
 
-
 // ── Password hashing (PBKDF2) ─────────────────────────────────────
 
 export async function hashPassword(password: string, salt: Uint8Array): Promise<string> {

@@ -3,7 +3,6 @@
 // Password Health — Key icon
 export const ICON_PASSWORD_HEALTH = `<svg viewBox="0 0 24 24" fill="none" stroke="#E8001F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="5"/><path d="M13 10l8-8"/><path d="M18 3l3 3"/><path d="M15 6l3 3"/><circle cx="8" cy="15" r="1.5" fill="#E8001F" stroke="none"/></svg>`;
 
-
 // Hash Forge — Chain link / hash
 export const ICON_HASH_FORGE = `<svg viewBox="0 0 24 24" fill="none" stroke="#E8001F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07L12 4.93"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07L12 19.07"/><path d="M9 9l6 6" stroke-width="1" stroke-dasharray="2 2"/></svg>`;
 

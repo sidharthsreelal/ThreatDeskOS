@@ -85,7 +85,6 @@ export function startShell(term: Terminal, username: string, onGui: () => void, 
         await runHashShell(t);
         break;
 
-
       case 'cve':
         await runCveShell(t);
         break;
@@ -113,7 +112,6 @@ export function startShell(term: Terminal, username: string, onGui: () => void, 
       case 'netvis':
         await runNetvisShell(t);
         break;
-
 
       default:
         t.print(`<span class="t-red">Unknown command:</span> ${command}`);
@@ -239,7 +237,6 @@ async function runHashShell(t: Terminal): Promise<void> {
     return false;
   });
 }
-
 
 // ── CVE RADAR ──────────────────────────────────────────────────────
 
