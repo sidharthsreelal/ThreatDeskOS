@@ -282,7 +282,6 @@ export function initDesktop(el: HTMLElement): void {
     if (e.key === 'Enter') {
       launchSelected();
     }
-    // Delete to unselect / clear? Or Escape?
     if (e.key === 'Escape') {
       iconStates.forEach(s => s.selected = false);
       updateIconPositions();

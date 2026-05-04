@@ -132,8 +132,7 @@ async function doInit(
     return;
   }
 
-
-  // "Yes, do as I say" confirmation
+  // Confirmation
   term.printBr();
   term.print('<span class="t-yellow">  ⚠ WARNING: This will initialize ThreatDesk OS and set your master credentials.</span>');
   term.print('<span class="t-yellow">    All data in this browser session will be managed by these credentials.</span>');
